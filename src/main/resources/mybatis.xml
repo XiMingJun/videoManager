@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!--指定日志默认实现方式为标准输出即控制台输出-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--配置model类别目录的别名,默认别名为该包下的类的小写形式-->
+    <!--每一个在包 domain.blog 中的 Java Bean，在没有注解的情况下，
+    会使用 Bean 的首字母小写的非限定类名来作为它的别名。
+    比如 domain.blog.Author 的别名为 author；若有注解，则别名为其注解值-->
+    <typeAliases>
+        <package name="org.lc.video.model"/>
+    </typeAliases>
+
+</configuration>
