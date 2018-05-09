@@ -9,8 +9,14 @@
   <!--给ContextLoaderListener配置参数，指定spring容器的配置文件路径-->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring-mvc.xml</param-value>
+    <param-value>classpath:spring-application-context.xml</param-value>
   </context-param>
+
+  <!--配置监听器，把spring容器引入到项目中来-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
 
   <!--解决后端接受前端数据乱码问题，统一utf-8编码-->
   <filter>
@@ -28,10 +34,7 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-  <!--配置监听器，把spring容器引入到项目中来-->
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
+
 
   <!--配置springMVC 的servlet-->
   <servlet>
@@ -39,7 +42,7 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring-application-context.xml</param-value>
+      <param-value>classpath:spring-mvc.xml</param-value>
     </init-param>
   </servlet>
   <!--配置springMVC 的url样式，只拦截.do结尾的用户请求-->
@@ -48,5 +51,8 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
 
 </web-app>

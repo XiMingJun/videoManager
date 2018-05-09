@@ -23,7 +23,7 @@
 
     <!--启动默认视图处理解析器（jsp）-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 

@@ -1,16 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: wangjian
-  Date: 2018/5/8
-  Time: 22:49
+  Date: 2018/5/9
+  Time: 14:14
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>hello</title>
+    <title>loginSuccess</title>
 </head>
 <body>
-hello liu yuyu
+登录成功
 </body>
 </html>
