@@ -2,10 +2,13 @@ package org.lc.video.service;
 
 import org.lc.video.mapper.AdminMapper;
 import org.lc.video.model.Admin;
+import org.lc.video.model.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("adminService")
+import java.util.List;
+
+@Service
 public class AdminServiceImpl implements IAdminService {
 
 
@@ -38,4 +41,5 @@ public class AdminServiceImpl implements IAdminService {
             return false;
         }
     }
+
 }

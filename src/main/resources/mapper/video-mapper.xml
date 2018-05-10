@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.lc.video.mapper.IVideoMapper">
+    <resultMap id="videoMap" type="org.lc.video.model.Video">
+        <id column="video_id" property="videoId"/>
+        <result column="course_id" property="courseId"/>
+        <result column="teacher_id" property="teacherId"/>
+        <result column="create_userId" property="createUserId"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="video_length" property="videoLength"/>
+        <result column="cover" property="cover"/>
+        <result column="video_address" property="video_address"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_update" property="gmtUpdate"/>
+        <result column="is_delete" property="delete"/>
+    </resultMap>
+
+    <select id="selectAllVideo" resultMap="videoMap">
+        SELECT  * FROM video
+    </select>
+
+
+</mapper>
