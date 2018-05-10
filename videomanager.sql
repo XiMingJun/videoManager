@@ -1,5 +1,4 @@
 
-
 -- 用户表
 CREATE TABLE `videomanager`.`user`(
   `user_id` bigint(10) PRIMARY KEY AUTO_INCREMENT NOT NULL COMMENT '用户id',
@@ -35,8 +34,7 @@ CREATE TABLE `videomanager`.`teacher` (
   `description` varchar(255) NULL COMMENT '简介',
   `job` varchar(50) NULL COMMENT '职务',
   `create_admin` bigint(10) NULL COMMENT '创建操作员',
-  `modified_admin` bigint(10) NULL COMMENT '修改操作员',
-  PRIMARY KEY (`teacher_id`)
+  `modified_admin` bigint(10) NULL COMMENT '修改操作员'
 );
 
 -- 视频表
@@ -77,7 +75,7 @@ CREATE TABLE `videomanager`.`course` (
   `modified_admin` bigint(10) NULL DEFAULT NULL COMMENT '修改操作员',
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '名称',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '简介',
-  `subject_id` bigint(10) NULL COMMENT '学科id',
+  `subject_id` bigint(10) NULL COMMENT '学科id'
 );
 
 -- 学科表
@@ -87,6 +85,6 @@ CREATE TABLE `videomanager`.`subject`  (
   `gmt_modified` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '上次更新时间',
   `create_admin` bigint(10) NULL DEFAULT NULL COMMENT '创建操作员',
   `modified_admin` bigint(10) NULL DEFAULT NULL COMMENT '修改操作员',
-  `title` varchar(50) NULL COMMENT '学科名称',
+  `title` varchar(50) NULL COMMENT '学科名称'
  
 );
