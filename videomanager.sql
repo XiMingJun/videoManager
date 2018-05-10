@@ -88,3 +88,43 @@ CREATE TABLE `videomanager`.`subject`  (
   `title` varchar(50) NULL COMMENT '学科名称'
  
 );
+
+INSERT INTO admin_user(`name`,`password`) VALUES('admin','12345');
+
+ALTER TABLE course  ADD `is_delete` tinyint(1) NULL DEFAULT 0 COMMENT '是否删除 0 未删除，1 已删除';
+ALTER TABLE `subject`  ADD `is_delete` tinyint(1) NULL DEFAULT 0 COMMENT '是否删除 0 未删除，1 已删除';
+
+INSERT INTO course(create_admin,title,description,subject_id) 
+VALUES
+(1,'javaWeb','javaWeb基础课程',1),
+(1,'java','java基础课程',1),
+(1,'hadoop','hadoop基础课程',1),
+(1,'scala','scala基础课程',1),
+(2,'色彩搭配','色彩搭配基础课程',1),
+(2,'设计','UI设计基础',1),
+(3,'VR','VR基础课程',1),
+(4,'python基础','python基础课程',1);
+
+INSERT INTO `subject`(create_admin,gmt_create,title) 
+VALUES
+(1,CURRENT_TIME,'大数据'),
+(1,CURRENT_TIME,'UI'),
+(1,CURRENT_TIME,'VR'),
+(1,CURRENT_TIME,'Python人工智能');
+
+
+INSERT INTO teacher(`name`,gmt_create,description,job,create_admin)
+VALUES
+('BD_赵',CURRENT_TIME,'大数据赵老师','讲师',1),
+('UI_钱',CURRENT_TIME,'UI 钱老师','讲师',1),
+('VR_孙',CURRENT_TIME,'VR孙老师','讲师',1),
+('Python_李',CURRENT_TIME,'python李老师','讲师',1)
+;
+
+INSERT INTO video(course_id,teacher_id,title,description,create_userId,gmt_create)
+VALUES
+(1,1,'servlet基础','介绍servlet基础用法',1,CURRENT_TIME),
+(2,1,'for循环','介绍for循环',1,CURRENT_TIME),
+(5,2,'色彩学','色彩学基础',1,CURRENT_TIME),
+(8,4,'servlet基础','介绍servlet基础用法',1,CURRENT_TIME);
+
