@@ -33,9 +33,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">视频管理</a></li>
-                <li><a href="#about">主讲人管理</a></li>
-                <li><a href="#contact">课程管理</a></li>
+                <li class="active"><a href="/videoManager/videos/all.do">视频管理</a></li>
+                <li><a href="/videoManager/teachers/all.do">主讲人管理</a></li>
+                <li><a href="/videoManager/course/all.do">课程管理</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">统计分析 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -60,15 +60,23 @@
             <form class="form-inline">
                 <div class="form-group">
                     <label for="exampleInputName2">视频名称</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+                    <input type="text" class="form-control" id="exampleInputName2" placeholder="请输入课程名称">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail3">讲师</label>
-                    <input type="email" class="form-control" id="exampleInputEmail3" placeholder="jane.doe@example.com">
+                    <label >讲师</label>
+                    <select name="searchTeacher">
+                        <option value="1">teacherA</option>
+                        <option value="2">teacherA</option>
+                        <option value="3">teacherA</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail4">课程</label>
-                    <input type="email" class="form-control" id="exampleInputEmail4" placeholder="jane.doe@example.com">
+                    <label >课程</label>
+                    <select name="searchCourse">
+                        <option value="1">courseA</option>
+                        <option value="2">courseB</option>
+                        <option value="3">courseC</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">查询</button>
                 <a class="btn btn-warning" data-toggle="modal" data-target="#myModal">新增</a>
@@ -87,7 +95,7 @@
                     <label>课程名称： <input type="text" class="form-control"  placeholder="请输入课程名称"></label>
                     <label>
                         <p>课程所属学科：</p>
-                        <select name="teacherSelect">
+                        <select name="courseSelect">
                             <option value="1">大数据</option>
                             <option value="2">UI</option>
                             <option value="3">VR</option>
@@ -138,7 +146,7 @@
                 <td>${aVideo.teacherId}</td>
                 <td>${aVideo.videoLength}</td>
                 <td>${aVideo.cover}</td>
-                <td>${aVideo.video_address}</td>
+                <td>${aVideo.videoAddress}</td>
                 <td>
                     <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#myModal">修改</button>
                     <button type="button" class="btn btn-xs btn-danger" onclick="confirm('确认删除么')">删除</button>

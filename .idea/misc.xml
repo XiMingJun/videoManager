@@ -11,6 +11,7 @@
     </option>
   </component>
   <component name="ProjectResources">
+    <resource url="http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" location="$PROJECT_DIR$" />
     <default-html-doctype>http://jakarta.apache.org/log4j/</default-html-doctype>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" project-jdk-name="9.0" project-jdk-type="JavaSDK">

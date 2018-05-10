@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--引入第三方依赖-->
+    <!--<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+
+    <!--mybatis生成代码基本配置文件-->
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+        <!--jdbc驱动配置-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/videomanager?useSSL=false"
+                        userId="root"
+                        password="wang201314">
+        </jdbcConnection>
+
+        <!--数据库类型和java类型之间的映射关系-->
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--配置实体类的包名和文件生成路径
+        targetPackage:实体类的包名
+        targetProject：项目代码源文件路径
+        -->
+        <javaModelGenerator targetPackage="org.lc.video.model" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--mapper配置文件的包名和文件生成路径
+        targetPackage:mapper文件的包名
+        targetProject：项目代码源文件路径
+        -->
+        <sqlMapGenerator targetPackage="mapper"  targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+
+        <!--配置mapper对应的接口类的生成包和文件路径-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="org.lc.video.mapper"  targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--配置表生成信息-->
+        <table schema="videomanager" tableName="admin_user" domainObjectName="Admin" >
+
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="admin_id" sqlStatement="MySql" identity="true" />
+
+            <columnOverride column="admin_id" property="adminId" />
+            <columnOverride column="is_delete" property="delete" />
+            <columnOverride column="gmt_create" property="gmtCreate" />
+            <columnOverride column="gmt_modified" property="gmtModified" />
+        </table>
+
+
+        <!--用户表-->
+        <table schema="videomanager" tableName="user" domainObjectName="User">
+
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="user_id" sqlStatement="MySql" identity="true" />
+
+            <columnOverride column="user_id" property="userId" />
+            <columnOverride column="is_delete" property="delete" />
+            <columnOverride column="gmt_create" property="gmtCreate" />
+            <columnOverride column="gmt_modified" property="gmtModified" />
+        </table>
+        <!--课程表-->
+        <table schema="videomanager" tableName="course" domainObjectName="Course">
+
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="course_id" sqlStatement="MySql" identity="true" />
+
+            <columnOverride column="course_id" property="courseId" />
+            <columnOverride column="create_admin" property="createAdmin" />
+            <columnOverride column="modified_admin" property="modifiedAdmin" />
+            <columnOverride column="subject_id" property="subjectId" />
+            <columnOverride column="is_delete" property="delete" />
+            <columnOverride column="gmt_create" property="gmtCreate" />
+            <columnOverride column="gmt_modified" property="gmtModified" />
+        </table>
+
+        <!--教师表-->
+        <table schema="videomanager" tableName="teacher" domainObjectName="Teacher">
+
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="teacher_id" sqlStatement="MySql" identity="true" />
+
+            <columnOverride column="teacher_id" property="teacherId" />
+            <columnOverride column="create_admin" property="createAdmin" />
+            <columnOverride column="modified_admin" property="modifiedAdmin" />
+            <columnOverride column="is_delete" property="delete" />
+            <columnOverride column="gmt_create" property="gmtCreate" />
+            <columnOverride column="gmt_modified" property="gmtModified" />
+        </table>
+
+        <!--学科表-->
+        <table schema="videomanager" tableName="subject" domainObjectName="Subject">
+
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="subject_id" sqlStatement="MySql" identity="true" />
+
+            <columnOverride column="subject_id" property="subjectId" />
+            <columnOverride column="create_admin" property="createAdmin" />
+            <columnOverride column="modified_admin" property="modifiedAdmin" />
+            <columnOverride column="is_delete" property="delete" />
+            <columnOverride column="gmt_create" property="gmtCreate" />
+            <columnOverride column="gmt_modified" property="gmtModified" />
+        </table>
+
+        <!--视频表-->
+        <table schema="videomanager" tableName="video" domainObjectName="Video">
+
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="video_id" sqlStatement="MySql" identity="true" />
+
+            <columnOverride column="video_id" property="videoId" />
+            <columnOverride column="course_id" property="courseId" />
+            <columnOverride column="teacher_id" property="teacherId" />
+            <columnOverride column="video_address" property="videoAddress" />
+            <columnOverride column="video_length" property="videoLength" />
+
+            <columnOverride column="create_userId" property="createUserId" />
+            <columnOverride column="is_delete" property="delete" />
+            <columnOverride column="gmt_create" property="gmtCreate" />
+            <columnOverride column="gmt_update" property="gmtUpdate" />
+        </table>
+
+    </context>
+</generatorConfiguration>

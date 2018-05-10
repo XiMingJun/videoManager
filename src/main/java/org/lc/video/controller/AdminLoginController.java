@@ -3,7 +3,7 @@ package org.lc.video.controller;
 import org.lc.video.model.Admin;
 import org.lc.video.model.Video;
 import org.lc.video.service.IAdminService;
-import org.lc.video.service.IHomeService;
+import org.lc.video.service.IVideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ public class AdminLoginController {
     private IAdminService adminService;//注入一个service接口的实现类对象
 
     @Autowired
-    private IHomeService videoService;
+    private IVideoService videoService;
 
     @RequestMapping("admin/loginPage")
     public String loginPage() {
@@ -42,8 +42,6 @@ public class AdminLoginController {
             System.out.println(e.getMessage());
         }
         if (isValide){
-
-
             List<Video> videoList = videoService.findAllVideo();
             model.addAttribute("videoList",videoList);
 
@@ -51,7 +49,7 @@ public class AdminLoginController {
                     videoList) {
                 System.out.println(video.toString());
             }
-            return "admin/home";
+            return "admin/video";
         }
         else{
 
@@ -59,4 +57,5 @@ public class AdminLoginController {
 
         }
     }
+
 }
