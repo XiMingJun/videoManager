@@ -19,6 +19,7 @@ public class CourseServiceImpl implements ICourseService {
 
         CourseExample example = new CourseExample();
         CourseExample.Criteria criteria = example.createCriteria();
+
         criteria.andDeleteEqualTo(false);//未删除的
         return courseMapper.selectByExample(example);
     }

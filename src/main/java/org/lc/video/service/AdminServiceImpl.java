@@ -32,6 +32,8 @@ public class AdminServiceImpl implements IAdminService {
 
                 if (admin.getPassword().equals(result.getPassword())) {
 
+                    admin.setAdminId(result.getAdminId());
+
                     return true;
                 } else {
                     System.out.println("密码错误");

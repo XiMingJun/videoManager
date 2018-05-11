@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -8,6 +9,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
+
 
     <!--启用注解-->
     <mvc:annotation-driven validator="validator"/>
@@ -48,6 +50,17 @@
             </list>
         </property>
     </bean>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--设置拦截的请求-->
+            <mvc:mapping path="/**"/>
+            <!--设置不拦截的请求-->
+            <mvc:exclude-mapping path="/admin/login.do"/>
+            <bean class="org.lc.video.interceptor.AdminLoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
 </beans>

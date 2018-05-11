@@ -20,7 +20,6 @@ public class VideoServiceImpl implements IVideoService {
 
         VideoExample example = new VideoExample();
         VideoExample.Criteria criteria = example.createCriteria();
-
         criteria.andDeleteEqualTo(false);
 
         return videoMapper.selectByExample(example);
