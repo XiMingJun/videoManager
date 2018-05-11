@@ -70,6 +70,7 @@ public class CourseServiceImpl implements ICourseService {
         if (searchSubId != null){
             criteria.andSubjectIdEqualTo(Long.valueOf(searchSubId));
         }
+        criteria.andDeleteEqualTo(false);
 
         return courseMapper.selectByExample(example);
     }

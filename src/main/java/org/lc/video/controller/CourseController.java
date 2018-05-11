@@ -2,7 +2,6 @@ package org.lc.video.controller;
 
 import org.lc.video.model.Admin;
 import org.lc.video.model.Course;
-import org.lc.video.model.CourseExample;
 import org.lc.video.model.Subject;
 import org.lc.video.service.ICourseService;
 import org.lc.video.service.ISubjectService;
@@ -97,7 +96,6 @@ public class CourseController {
         model.addAttribute("subjectList",subjectList);
 
         model.addAttribute("active","course");
-
 
         return "admin/course";
 

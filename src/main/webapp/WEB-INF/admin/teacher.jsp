@@ -35,22 +35,13 @@
             <form class="form-inline">
                 <div class="form-group">
                     <label for="exampleInputName2">讲师名字</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="请输入课程名称">
+                    <input type="text" class="form-control" id="exampleInputName2" placeholder="请输入讲师姓名">
                 </div>
                 <div class="form-group">
-                    <label >讲师</label>
-                    <select name="searchTeacher">
-                        <option value="1">teacherA</option>
-                        <option value="2">teacherA</option>
-                        <option value="3">teacherA</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label >课程</label>
-                    <select name="searchCourse">
-                        <option value="1">courseA</option>
-                        <option value="2">courseB</option>
-                        <option value="3">courseC</option>
+                    <label >性别</label>
+                    <select name="searchGender" class="form-control">
+                        <option value="0" >女</option>
+                        <option value="1" >男</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">查询</button>
@@ -67,29 +58,29 @@
                     <h4 class="modal-title" id="myModalLabel">讲师信息</h4>
                 </div>
                 <div class="modal-body">
-                    <label>课程名称： <input type="text" class="form-control"  placeholder="请输入课程名称"></label>
-                    <label>
-                        <p>课程所属学科：</p>
-                        <select name="courseSelect">
-                            <option value="1">大数据</option>
-                            <option value="2">UI</option>
-                            <option value="3">VR</option>
-                        </select>
-                    </label>
+                    <div class="form-group">
+                        <label>姓名：
+                        <input type="text" id="name" name="name" class="form-control"  placeholder="请输入讲师姓名">
+                        </label>
+                        <label>职位：
+                            <input type="text" id="job" name="job" class="form-control"  placeholder="请输入讲师职位">
+                        </label>
+                        <label>性别:
+                            <select name="courseSelect">
+                                <option value="0">女</option>
+                                <option value="1" selected="selected">男</option>
+                            </select>
+                        </label>
+                    </div>
 
-                    <label>
-                        <p>讲师：</p>
-                        <select name="teacherSelect">
-                            <option value="1">龙伟虎</option>
-                            <option value="2">张奇</option>
-                            <option value="3">石添添</option>
-                        </select>
-                    </label>
-                    <label>
-                        视频地址： <input type="text" class="form-control"  placeholder="请输入课程视频地址">
-                    </label>
-                    <p>课程描述： <textarea rows="5" cols="80"></textarea></p>
-                    <p>封面： <input type="text" class="form-control"  placeholder="请输入课程封面地址"></p>
+                    <div class="form-group">
+                        <label>头像：</label>
+                        <input type="text" id="portrait" name="portrait" class="form-control"  placeholder="请输入讲师头像地址">
+                    </div>
+                    <div class="form-group">
+                        <label>简介：</label>
+                        <textarea class="form-control" id="description"  name="description" rows="5" cols="80"></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -116,7 +107,9 @@
             <tr>
                 <th scope="row">${teacher.teacherId}</th>
                 <td>${teacher.name}</td>
-                <td>${teacher.gender}</td>
+                <td>
+                    ${teacher.gender}
+                </td>
                 <td>${teacher.portrait}</td>
                 <td>${teacher.description}</td>
                 <td>${teacher.job}</td>
