@@ -18,6 +18,8 @@ public class TeacherController {
     @RequestMapping("teachers/all")
     public String findAll(Model model) {
 
+        model.addAttribute("active","teacher");
+
         List<Teacher> teacherList = teacherService.findAllTeacher();
         model.addAttribute("teacherList",teacherList);
 

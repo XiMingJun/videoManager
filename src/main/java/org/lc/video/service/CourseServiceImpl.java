@@ -23,4 +23,54 @@ public class CourseServiceImpl implements ICourseService {
         criteria.andDeleteEqualTo(false);//未删除的
         return courseMapper.selectByExample(example);
     }
+
+//    public List<Course> getCourseByNameSubject(String name,Integer subjectId){
+//        CourseExample courseExample = new CourseExample();
+//        CourseExample.Criteria criteria = courseExample.createCriteria();
+//
+//    }
+    @Override
+    public Course saveCourse(Course course){
+
+        courseMapper.insertSelective(course);
+        return course;
+    }
+
+    @Override
+    public Course updateCourse(Course course){
+
+        courseMapper.updateByPrimaryKeySelective(course);
+        return course;
+    }
+
+    @Override
+    public int deleteCourse(String courseId) {
+
+        Course course = new Course();
+        course.setCourseId(Long.valueOf(courseId));
+        course.setDelete(true);
+
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria criteria = example.createCriteria();
+        criteria.andCourseIdEqualTo(Long.valueOf(courseId));
+
+        return courseMapper.updateByExampleSelective(course,example);
+    }
+
+    @Override
+    public List<Course> findCourse(String searchTitle, String searchSubId) {
+
+
+        CourseExample example = new CourseExample();
+        CourseExample.Criteria criteria = example.createCriteria();
+        if (searchTitle != null){
+            criteria.andTitleLike(String.format("%%s%%",searchTitle));
+        }
+
+        if (searchSubId != null){
+            criteria.andSubjectIdEqualTo(Long.valueOf(searchSubId));
+        }
+
+        return courseMapper.selectByExample(example);
+    }
 }

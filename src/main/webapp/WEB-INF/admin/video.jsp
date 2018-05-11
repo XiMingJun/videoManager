@@ -19,35 +19,9 @@
     <title>后台管理</title>
 </head>
 <body>
-<!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">智游视频网站后台管理</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">智游视频网站后台管理</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/videoManager/videos/all.do">视频管理</a></li>
-                <li><a href="/videoManager/teachers/all.do">主讲人管理</a></li>
-                <li><a href="/videoManager/course/all.do">课程管理</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">统计分析 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">课程播放统计</a></li>
-                        <li><a href="#">视频播放统计</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
 
+
+<jsp:include page="menu.jsp"/>
 <div class="container theme-showcase" role="main">
     <div class="">
         <h5>后台 <small>视频管理</small></h5>
@@ -65,17 +39,19 @@
                 <div class="form-group">
                     <label >讲师</label>
                     <select name="searchTeacher">
-                        <option value="1">teacherA</option>
-                        <option value="2">teacherA</option>
-                        <option value="3">teacherA</option>
+
+                        <c:forEach items="${requestScope.teacherList}" var="teacher">
+                            <option value="${teacher.teacherId}">${teacher.name}</option>
+                        </c:forEach>
                     </select>
                 </div>
                 <div class="form-group">
                     <label >课程</label>
                     <select name="searchCourse">
-                        <option value="1">courseA</option>
-                        <option value="2">courseB</option>
-                        <option value="3">courseC</option>
+                        <c:forEach items="${requestScope.courseList}" var="course">
+                            <option value="${course.courseId}">${course.title}</option>
+
+                        </c:forEach>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">查询</button>
@@ -92,33 +68,63 @@
                     <h4 class="modal-title" id="myModalLabel">视频信息</h4>
                 </div>
                 <div class="modal-body">
-                    <label>课程名称： <input type="text" class="form-control"  placeholder="请输入课程名称"></label>
-                    <label>
-                        <p>课程所属学科：</p>
-                        <select name="courseSelect">
-                            <option value="1">大数据</option>
-                            <option value="2">UI</option>
-                            <option value="3">VR</option>
-                        </select>
-                    </label>
 
-                    <label>
-                        <p>讲师：</p>
-                        <select name="teacherSelect">
-                            <option value="1">龙伟虎</option>
-                            <option value="2">张奇</option>
-                            <option value="3">石添添</option>
+                    <form action="/videoManager/course/saveCourse.do" id="courseForm">
+                    <div class="form-group">
+                        <label>课程名称：</label>
+                        <input type="text" id="courseTitle" name="title" class="form-control"  placeholder="请输入课程名称">
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>课程所属学科： </label>
+
+                        <select class="form-control" id="courseId" name="courseId">
+
+                            <c:forEach items="${requestScope.courseList}" var="course">
+                                <option value="${course.courseId}">${course.title}</option>
+                            </c:forEach>
+
                         </select>
-                    </label>
-                    <label>
-                        视频地址： <input type="text" class="form-control"  placeholder="请输入课程视频地址">
-                    </label>
-                    <p>课程描述： <textarea rows="5" cols="80"></textarea></p>
-                    <p>封面： <input type="text" class="form-control"  placeholder="请输入课程封面地址"></p>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>讲师：</label>
+                        <select class="form-control" name="teacherId">
+
+                            <c:forEach items="${requestScope.teacherList}" var="teacher">
+                                <option value="${teacher.teacherId}">${teacher.name}</option>
+                            </c:forEach>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>视频地址：</label>
+                        <input type="text" id="videoAddress" name="videoAddress" class="form-control"  placeholder="请输入课程视频地址">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>封面：</label>
+                         <input type="text" id="coverAddress" name="cover" class="form-control"  placeholder="请输入课程封面地址">
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>课程描述：</label>
+                        <textarea class="form-control" id="description"  name="description" rows="5" cols="80"></textarea>
+                    </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#courseForm').submit()">保存</button>
                 </div>
             </div>
         </div>

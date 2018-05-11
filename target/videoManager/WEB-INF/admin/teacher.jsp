@@ -20,33 +20,8 @@
 </head>
 <body>
 <!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">智游视频网站后台管理</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">智游视频网站后台管理</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li ><a href="/videoManager/videos/all.do">视频管理</a></li>
-                <li class="active"><a href="/videoManager/teacher/all.do">主讲人管理</a></li>
-                <li><a href="/videoManager/course/all.do">课程管理</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">统计分析 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">课程播放统计</a></li>
-                        <li><a href="#">视频播放统计</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
+
+<jsp:include page="menu.jsp"/>
 
 <div class="container theme-showcase" role="main">
     <div class="">

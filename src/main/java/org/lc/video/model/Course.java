@@ -299,4 +299,20 @@ public class Course {
     public void setDelete(Boolean delete) {
         this.delete = delete;
     }
+
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId=" + courseId +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", createAdmin=" + createAdmin +
+                ", modifiedAdmin=" + modifiedAdmin +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", subjectId=" + subjectId +
+                ", delete=" + delete +
+                '}';
+    }
 }

@@ -20,33 +20,7 @@
 </head>
 <body>
 <!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">智游视频网站后台管理</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">智游视频网站后台管理</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li ><a href="/videoManager/videos/all.do">视频管理</a></li>
-                <li ><a href="/videoManager/teachers/all.do">主讲人管理</a></li>
-                <li class="active"><a href="/videoManager/course/all.do">课程管理</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">统计分析 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">课程播放统计</a></li>
-                        <li><a href="#">视频播放统计</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
+<jsp:include page="menu.jsp"/>
 
 <div class="container theme-showcase" role="main">
     <div class="">
@@ -57,60 +31,66 @@
             <h3 class="panel-title">课程查询</h3>
         </div>
         <div class="panel-body">
-            <form class="form-inline">
+            <form class="form-inline" action="/videoManager/course/search.do" method="post">
                 <div class="form-group">
                     <label for="exampleInputName2">课程名字</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="请输入课程名称">
+                    <input type="text" name="searchTitle" class="form-control" id="exampleInputName2" placeholder="请输入课程名称">
                 </div>
                 <div class="form-group">
-                    <label >讲师</label>
-                    <select name="searchTeacher">
-                        <option value="1">teacherA</option>
-                        <option value="2">teacherA</option>
-                        <option value="3">teacherA</option>
+                    <label >学科</label>
+                    <select name="searchSubId">
+
+                        <c:forEach items="${requestScope.subjectList}" var="subject">
+
+                            <option value="${subject.subjectId}">${subject.title}</option>
+
+                        </c:forEach>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">查询</button>
+                <button type="submit" class="btn btn-primary" >查询</button>
                 <a class="btn btn-warning" data-toggle="modal" data-target="#myModal">新增</a>
             </form>
         </div>
     </div>
-    <!-- Modal 添加，修改讲师信息 -->
+    <!-- Modal 添加，修改课程信息 -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">讲师信息</h4>
+                    <h4 class="modal-title" id="myModalLabel">课程信息</h4>
                 </div>
                 <div class="modal-body">
-                    <label>课程名称： <input type="text" class="form-control"  placeholder="请输入课程名称"></label>
-                    <label>
-                        <p>课程所属学科：</p>
-                        <select name="courseSelect">
-                            <option value="1">大数据</option>
-                            <option value="2">UI</option>
-                            <option value="3">VR</option>
-                        </select>
-                    </label>
 
-                    <label>
-                        <p>讲师：</p>
-                        <select name="teacherSelect">
-                            <option value="1">龙伟虎</option>
-                            <option value="2">张奇</option>
-                            <option value="3">石添添</option>
-                        </select>
-                    </label>
-                    <label>
-                        视频地址： <input type="text" class="form-control"  placeholder="请输入课程视频地址">
-                    </label>
-                    <p>课程描述： <textarea rows="5" cols="80"></textarea></p>
-                    <p>封面： <input type="text" class="form-control"  placeholder="请输入课程封面地址"></p>
+                    <form action="/videoManager/course/saveCourse.do" id="courseForm" method="post">
+                        <input  name="courseId" hidden>
+
+                        <div class="form-group">
+                            <label>课程名称：</label>
+                            <input type="text" id="courseTitle" name="title" class="form-control"  placeholder="请输入课程名称">
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>课程所属学科： </label>
+
+                            <select class="form-control" id="subjectId" name="subjectId">
+
+                                <c:forEach items="${requestScope.subjectList}" var="subject">
+                                    <option value="${subject.subjectId}">${subject.title}</option>
+                                </c:forEach>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>课程描述：</label>
+                            <textarea class="form-control" id="description"  name="description" rows="5" cols="80"></textarea>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$('#courseForm').reset()">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#courseForm').submit()">保存</button>
                 </div>
             </div>
         </div>
@@ -128,19 +108,55 @@
         <tbody>
         <%--遍历课程数组--%>
         <c:forEach  var="course" items="${requestScope.courseList}" >
-            <tr>
+            <tr id="courseId${course.courseId}"+>
                 <th scope="row">${course.courseId}</th>
                 <td>${course.subjectId}</td>
                 <td>${course.title}</td>
                 <td>${course.description}</td>
                 <td>
-                    <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#myModal">修改</button>
-                    <button type="button" class="btn btn-xs btn-danger" onclick="confirm('确认删除么')">删除</button>
+                    <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#myModal" onclick="fillModify('${course.courseId}','${course.subjectId}','${course.title}','${course.description}')">修改</button>
+                    <button type="button" class="btn btn-xs btn-danger" onclick="confirmDelete('确认删除么','${course.courseId}')">删除</button>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <script type="text/javascript">
+        function fillModify(courseId,subjectId,title,description) {
+            //自动填充值
+            $("select[name='subjectId']").val(subjectId)
+            $("input[name='title']").val(title)
+            $("textarea[name='description']").text(description)
+            $("input[name='courseId']").val(courseId)
+        }
+        //使用ajax从数据库取数据，填入表单
+        function confirmDelete(message,courseId) {
+
+
+            if (confirm(message)){
+
+                //异步发送请求到服务端
+                $.ajax({
+                    url:"/videoManager/course/delete.do?id="+courseId,
+                    type:"post",
+                    data:{"course_id":courseId},
+                    success:function (data) {
+
+                        if (data == "yes"){
+                            alert("删除成功")
+                            $("#courseId"+courseId).remove();
+
+                        }
+                        else{
+                            alert("删除失败")
+                        }
+                    }
+                })
+            }
+        }
+
+
+    </script>
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li>
