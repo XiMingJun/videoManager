@@ -64,7 +64,7 @@ public class CourseServiceImpl implements ICourseService {
         CourseExample example = new CourseExample();
         CourseExample.Criteria criteria = example.createCriteria();
         if (searchTitle != null){
-            criteria.andTitleLike(String.format("%%s%%",searchTitle));
+            criteria.andTitleLike("%"+searchTitle+"%");
         }
 
         if (searchSubId != null){

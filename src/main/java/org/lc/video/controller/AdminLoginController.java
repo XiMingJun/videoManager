@@ -87,7 +87,6 @@ public class AdminLoginController {
 
         if (isValide){
 
-
 //            设置session
             request.getSession().setAttribute("sessionUser",admin);
 

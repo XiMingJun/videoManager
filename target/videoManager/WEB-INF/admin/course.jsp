@@ -108,7 +108,7 @@
         <tbody>
         <%--遍历课程数组--%>
         <c:forEach  var="course" items="${requestScope.courseList}" >
-            <tr id="courseId${course.courseId}"+>
+            <tr id="courseId${course.courseId}">
                 <th scope="row">${course.courseId}</th>
                 <td>${course.subjectId}</td>
                 <td>${course.title}</td>
@@ -148,7 +148,7 @@
 
                         }
                         else{
-                            alert("删除失败")
+                            alert("删除失败,请联系管理员")
                         }
                     }
                 })

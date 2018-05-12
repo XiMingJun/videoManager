@@ -37,13 +37,11 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public int deleteTeacher(String teacherId) {
+    public int deleteTeacher(Teacher teacher) {
 
-        Teacher teacher = new Teacher();
-        teacher.setTeacherId(Long.valueOf(teacherId));
         teacher.setDelete(true);
-
         return teacherMapper.updateByPrimaryKeySelective(teacher);
+
     }
 
     @Override
@@ -53,12 +51,17 @@ public class TeacherServiceImpl implements ITeacherService {
         TeacherExample.Criteria criteria = example.createCriteria();
 
         if (name != null){
-            criteria.andNameLike(String.format("%%s%%",name));
+            criteria.andNameLike("%"+name+"%");
         }
         if (gender != null){
-            if (gender.equals("1"))criteria.andGenderEqualTo(true);
-            if (gender.equals("0"))criteria.andGenderEqualTo(false);
-            
+
+            if (gender.equals("1")){
+                criteria.andGenderEqualTo(true);
+            }
+            if (gender.equals("0")){
+                criteria.andGenderEqualTo(false);
+            }
+
         }
         criteria.andDeleteEqualTo(false);
 

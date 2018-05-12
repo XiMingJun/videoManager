@@ -28,7 +28,7 @@ public interface ITeacherService {
     /**
      * 删除讲师信息
      * */
-    int deleteTeacher(String teacherId);
+    int deleteTeacher(Teacher teacher);
 
     /**
      * 搜索满足条件的讲师

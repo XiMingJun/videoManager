@@ -363,6 +363,24 @@ public class Teacher {
      * @mbg.generated Thu May 10 19:32:54 CST 2018
      */
     public void setModifiedAdmin(Long modifiedAdmin) {
+
         this.modifiedAdmin = modifiedAdmin;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "teacherId=" + teacherId +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", gmtModified=" + gmtModified +
+                ", portrait='" + portrait + '\'' +
+                ", delete=" + delete +
+                ", gmtCreate=" + gmtCreate +
+                ", description='" + description + '\'' +
+                ", job='" + job + '\'' +
+                ", createAdmin=" + createAdmin +
+                ", modifiedAdmin=" + modifiedAdmin +
+                '}';
     }
 }

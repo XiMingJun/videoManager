@@ -32,10 +32,10 @@
             <h3 class="panel-title">主讲人查询</h3>
         </div>
         <div class="panel-body">
-            <form class="form-inline">
+            <form class="form-inline" id="searchForm" action="/videoManager/teacher/search.do" method="post">
                 <div class="form-group">
-                    <label for="exampleInputName2">讲师名字</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="请输入讲师姓名">
+                    <label >讲师名字</label>
+                    <input type="text" class="form-control" name="searchName" placeholder="请输入讲师姓名">
                 </div>
                 <div class="form-group">
                     <label >性别</label>
@@ -44,7 +44,7 @@
                         <option value="1" >男</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">查询</button>
+                <button type="submit" class="btn btn-primary" onclick="$('#searchForm').submit">查询</button>
                 <a class="btn btn-warning" data-toggle="modal" data-target="#myModal">新增</a>
             </form>
         </div>
@@ -57,7 +57,10 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">讲师信息</h4>
                 </div>
+                <form action="/videoManager/teacher/save.do" id="teacherForm" method="post">
+
                 <div class="modal-body">
+                    <input type="text" hidden name="teacherId">
                     <div class="form-group">
                         <label>姓名：
                         <input type="text" id="name" name="name" class="form-control"  placeholder="请输入讲师姓名">
@@ -82,10 +85,12 @@
                         <textarea class="form-control" id="description"  name="description" rows="5" cols="80"></textarea>
                     </div>
                 </div>
+                </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-primary" onclick="$('#teacherForm').submit()">保存</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -104,7 +109,7 @@
         <tbody>
         <%--遍历视频数组--%>
         <c:forEach  var="teacher" items="${requestScope.teacherList}" >
-            <tr>
+            <tr id="teacherId${teacher.teacherId}">
                 <th scope="row">${teacher.teacherId}</th>
                 <td>${teacher.name}</td>
                 <td>
@@ -114,13 +119,14 @@
                 <td>${teacher.description}</td>
                 <td>${teacher.job}</td>
                 <td>
-                    <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#myModal">修改</button>
-                    <button type="button" class="btn btn-xs btn-danger" onclick="confirm('确认删除么')">删除</button>
+                    <button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#myModal" onclick="fillData('${teacher.teacherId}','${teacher.name}','${teacher.job}', '${teacher.gender}','${teacher.portrait}','${teacher.description}')">修改</button>
+                    <button type="button" class="btn btn-xs btn-danger" onclick="confirmDeleteTeacher('${teacher.teacherId}')">删除</button>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li>
@@ -142,5 +148,44 @@
     </nav>
 </div> <!-- /container -->
 
+<script type="text/javascript">
+    //填充修改的内容
+    function fillData(teacherId,name,job,gender,portrait,description) {
+
+        $("input[name='teacherId']").val(teacherId)
+        $("input[name='name']").val(name)
+        $("input[name='job']").val(job)
+        $("select[name='gender']").val(gender)
+        $("input[name='portrait']").val(portrait)
+        $("textarea[name='description']").text(description)
+
+
+    }
+    //删除讲师信息
+    function confirmDeleteTeacher(teacherId) {
+
+        if (confirm("确定要删除该讲师信息吗")){
+            $.ajax({
+                url:"/videoManager/teacher/delete.do",
+                type:"post",
+                data:{"teacherId":teacherId},
+                success:function (data) {
+
+                    if (data == "yes"){
+
+                        alert("删除成功")
+                        //前端删除
+                        $("#teacherId"+teacherId).remove()
+
+
+                    }
+                    else{
+                        alert("删除失败，请联系管理员")
+                    }
+                }
+            })
+        }
+    }
+</script>
 </body>
 </html>
